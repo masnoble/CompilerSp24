@@ -1,4 +1,4 @@
-package scanner;
+package compiler.scanner;
 
 public class Token {
 
@@ -34,9 +34,10 @@ public class Token {
         RBRACKET_TOKEN, // "]"
         LCURLEY_TOKEN, // "{"
         RCURLEY_TOKEN, // "}"
-        LETTER_TOKEN // "letter"
+        LETTER_TOKEN, // "letter"
         //LEXICAL CONVENTIONS OF C PG.4 491/92
         // DFA PG 77
+        EOF_TOKEN
     } 
     
     private TokenType tokenType;

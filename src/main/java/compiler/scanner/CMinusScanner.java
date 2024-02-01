@@ -1,36 +1,50 @@
-package main.java.compiler.scanner;
+package compiler.scanner;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 
-import scanner.Token;
-import scanner.Token.TokenType;
+import compiler.scanner.Token.TokenType;
 
-public interface Scanner {
+interface Scanner {
     public Token getNextToken();
+
     public Token viewNextToken();
 }
 
+public class CMinusScanner implements Scanner {
 
-public class CMinusScanner {
-    
     private BufferedReader inFile;
     private Token nextToken;
 
-    public CMinusScanner(String filename){
-        inFile = new BufferedReader(new FileReader(filename));
+    public CMinusScanner(String filename) {
+        try {
+            inFile = new BufferedReader(new FileReader(filename));
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            return;
+        }
         nextToken = scanToken();
     }
 
-
-    public Token getNextToken(){
+    public Token getNextToken() {
         Token returnToken = nextToken;
-        if(nextToken.getType() != TokenType.EOF_TOKEN){
+        if (nextToken.getType() != TokenType.EOF_TOKEN) {
             nextToken = scanToken();
         }
         return returnToken;
     }
 
+    private Token scanToken() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'viewNextToken'");
+    };
+
+    public Token viewNextToken() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'viewNextToken'");
+    }
 
     // Main for Proj 1
     public static void main(String[] args) {
@@ -38,4 +52,5 @@ public class CMinusScanner {
         // Prints "Hello, World" in the terminal window.
         System.out.println("Hello, World- SCANNER!");
     }
+
 }
