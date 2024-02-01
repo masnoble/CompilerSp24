@@ -1,0 +1,25 @@
+            regex
+
+
+symbols     \+|-|\*|/|<|<=|>|>=|==|!=|=|;|,|(|)|[|]|{|}
+
+else        else
+if          if
+int         int
+return      return
+void        void
+while       while
+
+digit       0|...|9
+letter      a|...|z|A|...|Z
+ID          letter+
+NUM         digit+
+COMMENT     /\* .* \*/
+
+
+
+
+
+else|if|int|return|void|while|digit|letter|ID|NUM|COMMENT|symbols
+
+
