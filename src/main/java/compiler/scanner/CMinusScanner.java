@@ -1,15 +1,15 @@
 package compiler.scanner;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-
+import java.io.FileWriter;
 import compiler.scanner.Token.TokenType;
 
 interface Scanner {
     public Token getNextToken();
-
     public Token viewNextToken();
 }
 
@@ -59,11 +59,24 @@ public class CMinusScanner implements Scanner {
 
         ScanState state = ScanState.START;
         String currentTokenString = "";
+        Boolean foundEOF = false;
         while (state != ScanState.DONE) {
             char c = ' ';
             try {
+                
                 inFile.mark(1);
-                c = (char) inFile.read();
+
+                if (foundEOF){
+                    state = ScanState.DONE;
+                }
+
+                //Checking for end of file
+                int readVal = inFile.read();
+                if(readVal == -1){
+                    foundEOF = true;
+                }
+
+                c = (char) readVal;
 
                 switch (state) {
                     case START:
@@ -85,8 +98,39 @@ public class CMinusScanner implements Scanner {
                             state = ScanState.INCOMM1;
                         } else if (c == ' ') {
                             state = ScanState.START;
-                        } else {
+                        } else if (c == '(') {
+                            currentToken = new Token(TokenType.LPAREN_TOKEN);
                             state = ScanState.DONE;
+                        }else if (c == ')') {
+                            currentToken = new Token(TokenType.RPAREN_TOKEN);
+                            state = ScanState.DONE;
+                        }else if(c == '}'){
+                            currentToken = new Token(TokenType.RCURLEY_TOKEN);
+                            state = ScanState.DONE;
+                        }else if(c == '{'){
+                            currentToken = new Token(TokenType.LCURLEY_TOKEN);
+                            state = ScanState.DONE;
+                        }else if(c == '['){
+                            currentToken = new Token(TokenType.LBRACKET_TOKEN);
+                            state = ScanState.DONE;
+                        }else if(c == ']'){
+                            currentToken = new Token(TokenType.RBRACKET_TOKEN);
+                            state = ScanState.DONE;
+                        }else if(c == '+'){
+                            currentToken = new Token(TokenType.PLUS_TOKEN);
+                            state = ScanState.DONE;
+                        }else if(c == '*'){
+                            currentToken = new Token(TokenType.TIMES_TOKEN);
+                            state = ScanState.DONE;
+                        }else if(c == '-'){
+                            currentToken = new Token(TokenType.MINUS_TOKEN);
+                            state = ScanState.DONE;
+                        }else if(c == ';'){
+                            currentToken = new Token(TokenType.SEMI_TOKEN);
+                            state = ScanState.DONE;
+                        }
+                        else {
+                            state = ScanState.START;
                         }
                         break;
 
@@ -211,9 +255,21 @@ public class CMinusScanner implements Scanner {
 
     // Main for Proj 1
     public static void main(String[] args) {
+        CMinusScanner scanner = new CMinusScanner("./projectFiles/proj1/Test1.cm");
+        BufferedWriter writer;
 
-        // Prints "Hello, World" in the terminal window.
-        System.out.println("Hello, World- SCANNER!");
+        try {
+            writer = new BufferedWriter(new FileWriter("./projectFiles/proj1/Test1Result.txt"));
+            while(scanner.viewNextToken().getType() != TokenType.EOF_TOKEN){
+                Token tkn = scanner.getNextToken();
+                String str = ((String)tkn.getData()) +  " " + tkn.getType() + "\n";
+
+                writer.write(str);
+            }
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Couldn't write the file");
+        }
     }
-
 }
