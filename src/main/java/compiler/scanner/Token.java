@@ -8,19 +8,16 @@ public class Token {
         VOID_TOKEN,
         WHILE_TOKEN,
         IF_TOKEN, // "if"
-        THEN_TOKEN, // "then"
         ELSE_TOKEN, // "else"
-        END_TOKEN, // "end"
-        REPEAT_TOKEN, // "repeat"
-        UNTIL_TOKEN, // "until"
-        READ_TOKEN, // "read"
-        WRITE_TOKEN, // "write"
         ID_TOKEN, // {identifier}
         NUM_TOKEN, // {number}
         ASSIGN_TOKEN, // "="
+        NOT_EQ_TOKEN, // "!="
         EQ_TOKEN, // "=="
         LT_TOKEN, // "<"
+        LTE_TOKEN, // "<"
         GT_TOKEN, // ">"
+        GTE_TOKEN, // ">"
         ERROR_TOKEN, //
         SEMI_TOKEN, // ";"
         RPAREN_TOKEN, // ")"
@@ -34,7 +31,6 @@ public class Token {
         RBRACKET_TOKEN, // "]"
         LCURLEY_TOKEN, // "{"
         RCURLEY_TOKEN, // "}"
-        LETTER_TOKEN, // "letter"
         //LEXICAL CONVENTIONS OF C PG.4 491/92
         // DFA PG 77
         EOF_TOKEN
