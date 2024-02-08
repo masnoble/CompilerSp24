@@ -255,15 +255,15 @@ public class CMinusScanner implements Scanner {
 
     // Main for Proj 1
     public static void main(String[] args) {
-        CMinusScanner scanner = new CMinusScanner("./projectFiles/proj1/Test1.cm");
+        String fileName = "Test1";
+        CMinusScanner scanner = new CMinusScanner("./projectFiles/proj1/" + fileName + ".cm");
         BufferedWriter writer;
 
         try {
-            writer = new BufferedWriter(new FileWriter("./projectFiles/proj1/Test1Result.txt"));
+            writer = new BufferedWriter(new FileWriter("./projectFiles/proj1/" + fileName + "Result.txt"));
             while(scanner.viewNextToken().getType() != TokenType.EOF_TOKEN){
                 Token tkn = scanner.getNextToken();
                 String str = ((String)tkn.getData()) +  " " + tkn.getType() + "\n";
-
                 writer.write(str);
             }
             writer.close();
