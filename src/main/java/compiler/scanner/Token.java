@@ -26,7 +26,7 @@ public class Token {
         TIMES_TOKEN, // "*"
         MINUS_TOKEN, // "-"
         PLUS_TOKEN, // "+"
-        NOT_TOKEN, // "!"
+        COMMA_TOKEN, // ","
         LBRACKET_TOKEN, // "["
         RBRACKET_TOKEN, // "]"
         LCURLEY_TOKEN, // "{"

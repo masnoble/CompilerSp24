@@ -10,5 +10,7 @@ int fact(int x)
 void main (void)
 { int x;
   x = read();
+  4a5;
+  &
   if (x > 0) write ( fact(x) );
-}
+}/**/

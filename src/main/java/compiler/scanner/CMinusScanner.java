@@ -86,6 +86,8 @@ public class CMinusScanner implements Scanner {
                         } else if (Character.isLetter(c)) {
                             currentTokenString += c;
                             state = ScanState.INID;
+                        } else if (c == '\n' || c == ' ' || c == '\r') {
+                            state = ScanState.START;
                         } else if (c == '!') {
                             state = ScanState.INNOTEQUAL;
                         } else if (c == '=') {
@@ -96,8 +98,6 @@ public class CMinusScanner implements Scanner {
                             state = ScanState.INLTE;
                         } else if (c == '/') {
                             state = ScanState.INCOMM1;
-                        } else if (c == ' ') {
-                            state = ScanState.START;
                         } else if (c == '(') {
                             currentToken = new Token(TokenType.LPAREN_TOKEN);
                             state = ScanState.DONE;
@@ -128,14 +128,27 @@ public class CMinusScanner implements Scanner {
                         }else if(c == ';'){
                             currentToken = new Token(TokenType.SEMI_TOKEN);
                             state = ScanState.DONE;
+                        }else if(c == ','){
+                            currentToken = new Token(TokenType.COMMA_TOKEN);
+                            state = ScanState.DONE;
                         }
                         else {
-                            state = ScanState.START;
+                            if(foundEOF){
+                                currentToken = new Token(TokenType.EOF_TOKEN);
+                            } else {
+                                currentToken = new Token(TokenType.ERROR_TOKEN);
+                            }
+
+                            state = ScanState.DONE;
                         }
                         break;
 
                     case INNUM:
-                        if (!Character.isDigit(c)) {
+                        if(Character.isLetter(c)){
+                            state = ScanState.DONE;
+                            currentToken = new Token(TokenType.ERROR_TOKEN);
+                        }
+                        else if (!Character.isDigit(c)) {
                             state = ScanState.DONE;
                             inFile.reset();
                             currentToken = new Token(TokenType.NUM_TOKEN, currentTokenString);
@@ -145,7 +158,11 @@ public class CMinusScanner implements Scanner {
                         break;
 
                     case INID:
-                        if (!Character.isLetter(c)) {
+                        if(Character.isDigit(c)){
+                            state = ScanState.DONE;
+                            currentToken = new Token(TokenType.ERROR_TOKEN);                      
+                        }
+                        else if (!Character.isLetter(c)) {
                             state = ScanState.DONE;
                             inFile.reset();
                             TokenType retTokenType;
@@ -193,7 +210,7 @@ public class CMinusScanner implements Scanner {
                         if (c == '=') {
                             currentToken = new Token(TokenType.NOT_EQ_TOKEN);
                         } else {
-                            currentToken = new Token(TokenType.NOT_TOKEN);
+                            currentToken = new Token(TokenType.ERROR_TOKEN);
                             inFile.reset();
                         }
                         break;
@@ -220,29 +237,45 @@ public class CMinusScanner implements Scanner {
                     
 
                     case INCOMM1:
-                        if(c == '*'){
-                            state = ScanState.INCOMM2;
-                        }
-                        else{
-                            inFile.reset();
+                        if (foundEOF){
+                            currentToken = new Token(TokenType.ERROR_TOKEN);
+                            state = ScanState.DONE;
+                        } else {
+                            if(c == '*'){
+                                state = ScanState.INCOMM2;
+                            }
+                            else{
+                                inFile.reset();
+                            }
                         }
                         break;
                         
                     case INCOMM2:
-                        if(c == '*'){
-                            state = ScanState.INCOMM3;
+                        if (foundEOF){
+                            currentToken = new Token(TokenType.ERROR_TOKEN);
+                            state = ScanState.DONE;
+                        } else {
+                            if(c == '*'){
+                                state = ScanState.INCOMM3;
+                            }
                         }
                         break;
 
                     case INCOMM3:
-                        if (c == '/'){
-                            state = ScanState.START;
+                        if (foundEOF){
+                            currentToken = new Token(TokenType.ERROR_TOKEN);
+                            state = ScanState.DONE;
                         } else {
-                            state = ScanState.INCOMM2;
+                            if (c == '/'){
+                                state = ScanState.START;
+                            } else {
+                                state = ScanState.INCOMM2;
+                            }
                         }
                         break;
 
                     case DONE:
+                    break;
                 }
             } catch (IOException e) {
                 e.printStackTrace();
