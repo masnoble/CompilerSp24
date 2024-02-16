@@ -8,10 +8,7 @@ import java.io.IOException;
 import java.io.FileWriter;
 import compiler.scanner.Token.TokenType;
 
-interface Scanner {
-    public Token getNextToken();
-    public Token viewNextToken();
-}
+
 
 public class CMinusScanner implements Scanner {
 
@@ -32,6 +29,8 @@ public class CMinusScanner implements Scanner {
     private BufferedReader inFile;
     private Token nextToken;
 
+
+    
     public CMinusScanner(String filename) {
         try {
             inFile = new BufferedReader(new FileReader(filename));
@@ -42,6 +41,8 @@ public class CMinusScanner implements Scanner {
         nextToken = scanToken();
     }
 
+
+
     public Token getNextToken() {
         Token returnToken = nextToken;
         if (nextToken.getType() != TokenType.EOF_TOKEN) {
@@ -50,9 +51,13 @@ public class CMinusScanner implements Scanner {
         return returnToken;
     }
 
+
+
     public Token viewNextToken() {
         return nextToken;
     }
+
+
 
     private Token scanToken() {
         Token currentToken = new Token(TokenType.EOF_TOKEN);
