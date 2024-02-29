@@ -26,6 +26,7 @@ public class JFlexScanner implements Scanner {
 
   // Lexical states.
   public static final int YYINITIAL = 0;
+  public static final int INCOMMENT = 2;
 
   /**
    * ZZ_LEXSTATE[l] is the state in the DFA for the lexical state l
@@ -34,7 +35,7 @@ public class JFlexScanner implements Scanner {
    * l is of the form l = 2*k, k a non negative integer
    */
   private static final int ZZ_LEXSTATE[] = {
-     0, 0
+     0,  0,  1, 1
   };
 
   /**
@@ -105,12 +106,12 @@ public class JFlexScanner implements Scanner {
   private static final int [] ZZ_ACTION = zzUnpackAction();
 
   private static final String ZZ_ACTION_PACKED_0 =
-    "\1\0\1\1\2\2\1\1\1\3\1\4\1\5\1\6"+
+    "\2\0\1\1\2\2\1\1\1\3\1\4\1\5\1\6"+
     "\1\7\1\10\1\11\1\12\1\13\1\14\1\15\1\16"+
-    "\1\17\1\20\1\21\5\17\1\22\1\23\1\24\1\0"+
-    "\1\2\1\25\1\26\1\27\1\17\1\30\4\17\2\0"+
-    "\1\17\1\31\3\17\1\0\1\2\1\32\1\17\1\33"+
-    "\2\17\1\34\1\35";
+    "\1\17\1\20\1\21\5\17\1\22\1\23\1\2\1\24"+
+    "\1\25\1\0\1\26\1\27\1\30\1\17\1\31\4\17"+
+    "\1\32\1\1\1\17\1\33\3\17\1\34\1\17\1\35"+
+    "\2\17\1\36\1\37";
 
   private static int [] zzUnpackAction() {
     int [] result = new int[55];
@@ -138,13 +139,13 @@ public class JFlexScanner implements Scanner {
   private static final int [] ZZ_ROWMAP = zzUnpackRowMap();
 
   private static final String ZZ_ROWMAP_PACKED_0 =
-    "\0\0\0\45\0\45\0\112\0\157\0\45\0\45\0\45"+
-    "\0\45\0\45\0\45\0\224\0\271\0\45\0\336\0\u0103"+
-    "\0\u0128\0\u014d\0\45\0\45\0\u0172\0\u0197\0\u01bc\0\u01e1"+
-    "\0\u0206\0\45\0\45\0\45\0\u022b\0\u0250\0\45\0\45"+
-    "\0\45\0\u0275\0\u014d\0\u029a\0\u02bf\0\u02e4\0\u0309\0\u032e"+
-    "\0\u0353\0\u0378\0\u014d\0\u039d\0\u03c2\0\u03e7\0\u040c\0\u032e"+
-    "\0\u014d\0\u0431\0\u014d\0\u0456\0\u047b\0\u014d\0\u014d";
+    "\0\0\0\45\0\112\0\112\0\157\0\224\0\112\0\112"+
+    "\0\112\0\112\0\112\0\112\0\271\0\336\0\112\0\u0103"+
+    "\0\u0128\0\u014d\0\u0172\0\112\0\112\0\u0197\0\u01bc\0\u01e1"+
+    "\0\u0206\0\u022b\0\112\0\112\0\u0250\0\112\0\112\0\u0275"+
+    "\0\112\0\112\0\112\0\u029a\0\u0172\0\u02bf\0\u02e4\0\u0309"+
+    "\0\u032e\0\112\0\u0275\0\u0353\0\u0172\0\u0378\0\u039d\0\u03c2"+
+    "\0\u0172\0\u03e7\0\u0172\0\u040c\0\u0431\0\u0172\0\u0172";
 
   private static int [] zzUnpackRowMap() {
     int [] result = new int[55];
@@ -170,32 +171,35 @@ public class JFlexScanner implements Scanner {
   private static final int [] ZZ_TRANS = zzUnpacktrans();
 
   private static final String ZZ_TRANS_PACKED_0 =
-    "\1\2\2\3\1\0\1\4\1\5\1\6\1\7\1\10"+
-    "\1\11\1\12\1\13\1\14\1\15\1\16\1\17\1\20"+
-    "\1\21\1\22\1\23\1\24\1\22\1\25\2\22\1\26"+
-    "\3\22\1\27\3\22\1\30\1\31\1\32\1\33\47\0"+
-    "\1\3\62\0\1\34\34\0\1\35\3\0\1\36\45\0"+
-    "\1\15\47\0\1\37\44\0\1\40\44\0\1\41\46\0"+
-    "\1\22\2\0\16\22\24\0\1\22\2\0\5\22\1\42"+
-    "\10\22\24\0\1\22\2\0\2\22\1\43\3\22\1\44"+
-    "\7\22\24\0\1\22\2\0\1\22\1\45\14\22\24\0"+
-    "\1\22\2\0\7\22\1\46\6\22\24\0\1\22\2\0"+
-    "\3\22\1\47\12\22\2\0\10\50\1\51\34\50\2\36"+
-    "\1\3\1\36\1\4\40\36\22\0\1\22\2\0\11\22"+
-    "\1\52\4\22\24\0\1\22\2\0\12\22\1\53\3\22"+
-    "\24\0\1\22\2\0\12\22\1\54\3\22\24\0\1\22"+
-    "\2\0\4\22\1\55\11\22\24\0\1\22\2\0\4\22"+
-    "\1\56\11\22\2\0\10\50\1\57\44\50\1\57\3\50"+
-    "\1\60\30\50\22\0\1\22\2\0\1\22\1\61\14\22"+
-    "\24\0\1\22\2\0\13\22\1\62\2\22\24\0\1\22"+
-    "\2\0\1\63\15\22\24\0\1\22\2\0\5\22\1\64"+
-    "\10\22\2\0\10\50\1\57\3\50\1\3\30\50\22\0"+
-    "\1\22\2\0\10\22\1\65\5\22\24\0\1\22\2\0"+
-    "\1\22\1\66\14\22\24\0\1\22\2\0\6\22\1\67"+
-    "\7\22\2\0";
+    "\1\3\2\4\1\0\1\5\1\6\1\7\1\10\1\11"+
+    "\1\12\1\13\1\14\1\15\1\16\1\17\1\20\1\21"+
+    "\1\22\1\23\1\24\1\25\1\23\1\26\2\23\1\27"+
+    "\3\23\1\30\3\23\1\31\1\32\1\33\1\34\10\4"+
+    "\1\35\34\4\47\0\1\4\62\0\1\36\34\0\1\37"+
+    "\51\0\1\16\4\0\1\40\2\0\16\40\22\0\1\41"+
+    "\44\0\1\42\44\0\1\43\41\0\1\40\4\0\1\23"+
+    "\2\0\16\23\17\0\1\40\4\0\1\23\2\0\5\23"+
+    "\1\44\10\23\17\0\1\40\4\0\1\23\2\0\2\23"+
+    "\1\45\3\23\1\46\7\23\17\0\1\40\4\0\1\23"+
+    "\2\0\1\23\1\47\14\23\17\0\1\40\4\0\1\23"+
+    "\2\0\7\23\1\50\6\23\17\0\1\40\4\0\1\23"+
+    "\2\0\3\23\1\51\12\23\16\0\1\52\45\0\1\53"+
+    "\4\0\1\53\2\0\16\53\17\0\1\40\4\0\1\23"+
+    "\2\0\11\23\1\54\4\23\17\0\1\40\4\0\1\23"+
+    "\2\0\12\23\1\55\3\23\17\0\1\40\4\0\1\23"+
+    "\2\0\12\23\1\56\3\23\17\0\1\40\4\0\1\23"+
+    "\2\0\4\23\1\57\11\23\17\0\1\40\4\0\1\23"+
+    "\2\0\4\23\1\60\11\23\17\0\1\40\4\0\1\23"+
+    "\2\0\1\23\1\61\14\23\17\0\1\40\4\0\1\23"+
+    "\2\0\13\23\1\62\2\23\17\0\1\40\4\0\1\23"+
+    "\2\0\1\63\15\23\17\0\1\40\4\0\1\23\2\0"+
+    "\5\23\1\64\10\23\17\0\1\40\4\0\1\23\2\0"+
+    "\10\23\1\65\5\23\17\0\1\40\4\0\1\23\2\0"+
+    "\1\23\1\66\14\23\17\0\1\40\4\0\1\23\2\0"+
+    "\6\23\1\67\7\23\2\0";
 
   private static int [] zzUnpacktrans() {
-    int [] result = new int[1184];
+    int [] result = new int[1110];
     int offset = 0;
     offset = zzUnpacktrans(ZZ_TRANS_PACKED_0, offset, result);
     return result;
@@ -238,9 +242,9 @@ public class JFlexScanner implements Scanner {
   private static final int [] ZZ_ATTRIBUTE = zzUnpackAttribute();
 
   private static final String ZZ_ATTRIBUTE_PACKED_0 =
-    "\1\0\2\11\2\1\6\11\2\1\1\11\4\1\2\11"+
-    "\5\1\3\11\1\0\1\1\3\11\6\1\2\0\5\1"+
-    "\1\0\10\1";
+    "\2\0\2\11\2\1\6\11\2\1\1\11\4\1\2\11"+
+    "\5\1\2\11\1\1\2\11\1\0\3\11\6\1\1\11"+
+    "\15\1";
 
   private static int [] zzUnpackAttribute() {
     int [] result = new int[55];
@@ -807,7 +811,14 @@ public class JFlexScanner implements Scanner {
 
       if (zzInput == YYEOF && zzStartRead == zzCurrentPos) {
         zzAtEOF = true;
+            switch (zzLexicalState) {
+            case INCOMMENT: {
+              yybegin(YYINITIAL); return new Token(Token.TokenType.ERROR_TOKEN);
+            }  // fall though
+            case 56: break;
+            default:
         return null;
+        }
       }
       else {
         switch (zzAction < 0 ? zzAction : ZZ_ACTION[zzAction]) {
@@ -815,147 +826,157 @@ public class JFlexScanner implements Scanner {
             { return new Token(TokenType.ERROR_TOKEN);
             }
           // fall through
-          case 30: break;
+          case 32: break;
           case 2:
             { /* ignore */
             }
           // fall through
-          case 31: break;
+          case 33: break;
           case 3:
             { return new Token(TokenType.LPAREN_TOKEN);
             }
           // fall through
-          case 32: break;
+          case 34: break;
           case 4:
             { return new Token(TokenType.RPAREN_TOKEN);
             }
           // fall through
-          case 33: break;
+          case 35: break;
           case 5:
             { return new Token(TokenType.TIMES_TOKEN);
             }
           // fall through
-          case 34: break;
+          case 36: break;
           case 6:
             { return new Token(TokenType.PLUS_TOKEN);
             }
           // fall through
-          case 35: break;
+          case 37: break;
           case 7:
             { return new Token(TokenType.COMMA_TOKEN);
             }
           // fall through
-          case 36: break;
+          case 38: break;
           case 8:
             { return new Token(TokenType.MINUS_TOKEN);
             }
           // fall through
-          case 37: break;
+          case 39: break;
           case 9:
             { return new Token(TokenType.DIVIDE_TOKEN);
             }
           // fall through
-          case 38: break;
+          case 40: break;
           case 10:
             { return new Token(TokenType.NUM_TOKEN, yytext());
             }
           // fall through
-          case 39: break;
+          case 41: break;
           case 11:
             { return new Token(TokenType.SEMI_TOKEN);
             }
           // fall through
-          case 40: break;
+          case 42: break;
           case 12:
             { return new Token(TokenType.LT_TOKEN);
             }
           // fall through
-          case 41: break;
+          case 43: break;
           case 13:
             { return new Token(TokenType.ASSIGN_TOKEN);
             }
           // fall through
-          case 42: break;
+          case 44: break;
           case 14:
             { return new Token(TokenType.GT_TOKEN);
             }
           // fall through
-          case 43: break;
+          case 45: break;
           case 15:
             { return new Token(TokenType.ID_TOKEN, yytext());
             }
           // fall through
-          case 44: break;
+          case 46: break;
           case 16:
             { return new Token(TokenType.LBRACKET_TOKEN);
             }
           // fall through
-          case 45: break;
+          case 47: break;
           case 17:
             { return new Token(TokenType.RBRACKET_TOKEN);
             }
           // fall through
-          case 46: break;
+          case 48: break;
           case 18:
             { return new Token(TokenType.LCURLEY_TOKEN);
             }
           // fall through
-          case 47: break;
+          case 49: break;
           case 19:
             { return new Token(TokenType.RCURLEY_TOKEN);
             }
           // fall through
-          case 48: break;
+          case 50: break;
           case 20:
             { return new Token(TokenType.NOT_EQ_TOKEN);
             }
           // fall through
-          case 49: break;
-          case 21:
-            { return new Token(TokenType.LTE_TOKEN);
-            }
-          // fall through
-          case 50: break;
-          case 22:
-            { return new Token(TokenType.EQ_TOKEN);
-            }
-          // fall through
           case 51: break;
-          case 23:
-            { return new Token(TokenType.GTE_TOKEN);
+          case 21:
+            { yybegin(INCOMMENT);
             }
           // fall through
           case 52: break;
-          case 24:
-            { return new Token(TokenType.IF_TOKEN, yytext());
+          case 22:
+            { return new Token(TokenType.LTE_TOKEN);
             }
           // fall through
           case 53: break;
-          case 25:
-            { return new Token(TokenType.INT_TOKEN, yytext());
+          case 23:
+            { return new Token(TokenType.EQ_TOKEN);
             }
           // fall through
           case 54: break;
-          case 26:
-            { return new Token(TokenType.ELSE_TOKEN, yytext());
+          case 24:
+            { return new Token(TokenType.GTE_TOKEN);
             }
           // fall through
           case 55: break;
-          case 27:
-            { return new Token(TokenType.VOID_TOKEN, yytext());
+          case 25:
+            { return new Token(TokenType.IF_TOKEN, yytext());
             }
           // fall through
           case 56: break;
-          case 28:
-            { return new Token(TokenType.WHILE_TOKEN, yytext());
+          case 26:
+            { yybegin(YYINITIAL);
             }
           // fall through
           case 57: break;
-          case 29:
-            { return new Token(TokenType.RETURN_TOKEN, yytext());
+          case 27:
+            { return new Token(TokenType.INT_TOKEN, yytext());
             }
           // fall through
           case 58: break;
+          case 28:
+            { return new Token(TokenType.ELSE_TOKEN, yytext());
+            }
+          // fall through
+          case 59: break;
+          case 29:
+            { return new Token(TokenType.VOID_TOKEN, yytext());
+            }
+          // fall through
+          case 60: break;
+          case 30:
+            { return new Token(TokenType.WHILE_TOKEN, yytext());
+            }
+          // fall through
+          case 61: break;
+          case 31:
+            { return new Token(TokenType.RETURN_TOKEN, yytext());
+            }
+          // fall through
+          case 62: break;
           default:
             zzScanError(ZZ_NO_MATCH);
         }

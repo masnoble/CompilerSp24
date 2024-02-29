@@ -20,6 +20,7 @@ import java.io.FileNotFoundException;
 %column
 %function scanToken
 %type Token
+%state INCOMMENT
 
 
 %{
@@ -104,7 +105,6 @@ import java.io.FileNotFoundException;
 %}
 
 LineTerminator = \r|\n|\r\n
-InputCharacter = [^\r\n]
 WhiteSpace     = {LineTerminator} | [ \t\f]
 Digit          = [0-9]
 Num            = {Digit}+
@@ -112,14 +112,11 @@ Letter         = [A-Za-z]
 ID             = {Letter}+
 
 
-TraditionalComment   = "/*" [^*] ~"*/" | "/*" "*"+ "/"
+BeginComment         = "/*" 
+EndComment           = "*/"
 // Comment can be the last line of the file, without line terminator.
-EndOfLineComment     = "//" {InputCharacter}* {LineTerminator}?
-DocumentationComment = "/**" {CommentContent} "*"+ "/"
-CommentContent       = ( [^*] | \*+ [^/*] )*
-
+Error                = ({Num}{Letter}({Letter}|{Digit})+)|{ID}{Digit}({Letter}|{Digit})+
 /* comments */
-Comment = {TraditionalComment} | {EndOfLineComment} | {DocumentationComment}
 %%
 
 /* keywords */
@@ -129,11 +126,13 @@ Comment = {TraditionalComment} | {EndOfLineComment} | {DocumentationComment}
 <YYINITIAL> "while"             { return new Token(TokenType.WHILE_TOKEN, yytext()); }
 <YYINITIAL> "if"                { return new Token(TokenType.IF_TOKEN, yytext()); }
 <YYINITIAL> "else"              { return new Token(TokenType.ELSE_TOKEN, yytext()); }
+<YYINITIAL> {Error}                        { return new Token(TokenType.ERROR_TOKEN); }
 
 <YYINITIAL> {
+
     /* identifiers */ 
-    {ID}                   { return new Token(TokenType.ID_TOKEN, yytext()); }
-    {Num}                   { return new Token(TokenType.NUM_TOKEN, yytext()); }
+    {ID}                           { return new Token(TokenType.ID_TOKEN, yytext()); }
+    {Num}                          { return new Token(TokenType.NUM_TOKEN, yytext()); }
 
 
     /* operators */
@@ -157,10 +156,17 @@ Comment = {TraditionalComment} | {EndOfLineComment} | {DocumentationComment}
     "{"                            { return new Token(TokenType.LCURLEY_TOKEN); }
     "}"                            { return new Token(TokenType.RCURLEY_TOKEN); }
     /* comments */
-    {Comment}                      { /* ignore */ }
+    {BeginComment}                      { yybegin(INCOMMENT); }
     
     /* whitespace */
     {WhiteSpace}                   { /* ignore */ }
+    
 }
 
-.                     { return new Token(TokenType.ERROR_TOKEN);}  
+<INCOMMENT> {
+    {EndComment} { yybegin(YYINITIAL); }
+    <<EOF>> { yybegin(YYINITIAL); return new Token(Token.TokenType.ERROR_TOKEN); }
+    [^] { /* ignore */ }
+}
+
+.                     { return new Token(TokenType.ERROR_TOKEN);} 
