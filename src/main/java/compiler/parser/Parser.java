@@ -11,5 +11,10 @@ public class Parser {
     private Param parseParam();
     private CompoundStmt parseCompoundStmt();
     private Statement parseStatement();
-
+    private Expression parseExpression();
+    private BinaryExpression parseBinaryExpression();
+    private Expression parseFactor();
+    private Expression parseArgs();
+    
+}
 
