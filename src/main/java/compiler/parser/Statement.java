@@ -1,5 +1,5 @@
 package compiler.parser;
 
-public class Statement{
+public abstract class Statement{
     
 }

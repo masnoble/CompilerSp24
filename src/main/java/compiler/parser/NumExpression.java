@@ -1,5 +1,5 @@
 package compiler.parser;
 
-public class NumExpression{
+public class NumExpression extends Expression{
     
 }

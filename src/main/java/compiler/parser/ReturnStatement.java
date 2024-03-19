@@ -1,5 +1,5 @@
 package compiler.parser;
 
-public class ReturnStatement{
+public class ReturnStatement extends Statement{
     
 }

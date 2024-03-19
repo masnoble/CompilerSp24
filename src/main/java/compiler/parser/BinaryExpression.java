@@ -1,5 +1,5 @@
 package compiler.parser;
 
-public class BinaryExpression{
+public class BinaryExpression extends Expression{
     
 }

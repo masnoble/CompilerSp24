@@ -1,5 +1,5 @@
 package compiler.parser;
 
-public class IDExpression{
+public class IDExpression extends Expression{
     
 }

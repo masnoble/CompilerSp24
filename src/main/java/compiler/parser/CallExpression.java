@@ -1,5 +1,5 @@
 package compiler.parser;
 
-public class CallExpression{
+public class CallExpression extends Expression{
     
 }

@@ -1,5 +1,5 @@
 package compiler.parser;
 
-public class ExpressionStatement{
+public class ExpressionStatement extends Statement{
     
 }

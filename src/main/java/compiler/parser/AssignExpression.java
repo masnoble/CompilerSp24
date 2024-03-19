@@ -1,5 +1,5 @@
 package compiler.parser;
 
-public class AssignExpression{
+public class AssignExpression extends Expression {
     
 }

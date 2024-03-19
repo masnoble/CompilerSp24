@@ -1,5 +1,5 @@
 package compiler.parser;
 
-public class CompoundStatement{
+public class CompoundStatement extends Statement{
     
 }

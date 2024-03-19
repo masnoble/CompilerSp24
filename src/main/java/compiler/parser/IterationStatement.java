@@ -1,5 +1,5 @@
 package compiler.parser;
 
-public class IterationStatement{
+public class IterationStatement extends Statement{
     
 }
