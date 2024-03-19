@@ -2,11 +2,9 @@ package compiler.parser;
 
 
 public class Declaration{
-    private boolean voidint; //if false is void, if true is int
-    private String ID; 
-    private int num;
-    private CompoundStatement CompoundStatement;
-    private Param param;
+    boolean voidint; //if false is void, if true is int
+    String ID; 
+    int num;
 
     
     Declaration(boolean VI, String identifier, int number){
@@ -14,12 +12,4 @@ public class Declaration{
         ID = identifier;
         num = number;
     }
-
-    Declaration(boolean VI, String identifier, Param params, CompoundStatement CS){
-        voidint = VI;
-        ID = identifier;
-        param = params; 
-        CompoundStatement = CS;
-    }
-
 }
