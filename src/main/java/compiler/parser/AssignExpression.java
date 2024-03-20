@@ -1,9 +1,9 @@
 package compiler.parser;
 
 public class AssignExpression extends Expression {
-    IDExpression lhs;
+    VarExpression lhs;
     Expression rhs;
-    AssignExpression(IDExpression inLHS, Expression inRHS){
+    AssignExpression(VarExpression inLHS, Expression inRHS){
         lhs = inLHS;
         rhs = inRHS;
     }

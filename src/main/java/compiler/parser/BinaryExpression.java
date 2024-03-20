@@ -1,13 +1,11 @@
 package compiler.parser;
 
-import compiler.scanner.Token.TokenType;
-
 public class BinaryExpression extends Expression{
     Expression lhs;
     Expression rhs;
-    TokenType operator;
+    String operator;
 
-    BinaryExpression(Expression inLHS, Expression inRHS, TokenType inOperator){
+    BinaryExpression(Expression inLHS, Expression inRHS, String inOperator){
         lhs = inLHS;
         rhs = inRHS;
         operator = inOperator;
