@@ -310,22 +310,4 @@ public class CMinusScanner implements Scanner {
             System.out.println("Couldn't write the file");
         }
     }
-
-    public static void scanProgram(String filename){
-        CMinusScanner scanner = new CMinusScanner("./projectFiles/proj2/" + filename + ".cm");
-        BufferedWriter writer;
-
-        try {
-            writer = new BufferedWriter(new FileWriter("./projectFiles/proj2/" + filename + "Result.txt"));
-            while(scanner.viewNextToken().getType() != TokenType.EOF_TOKEN){
-                Token tkn = scanner.getNextToken();
-                String str = ((String)tkn.getData()) +  " " + tkn.getType() + "\n";
-                writer.write(str);
-            }
-            writer.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.out.println("Couldn't write the file");
-        }
-    }
 }

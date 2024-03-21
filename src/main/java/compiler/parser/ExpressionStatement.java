@@ -5,4 +5,12 @@ public class ExpressionStatement extends Statement{
     ExpressionStatement(Expression inExpression){
         expression = inExpression;
     }
+
+    void print(String prefix){
+        System.out.println(prefix + "[");
+        expression.print(prefix + "    ");
+        System.out.println(prefix + "]");
+    }
 }
+    
+

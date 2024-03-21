@@ -10,4 +10,16 @@ public class CallExpression extends Expression{
         ID = inID;
         args = inArgs;
     }
+
+    void print(String prefix){
+        System.out.println(prefix + ID + "(");
+        if(args.isEmpty()){
+            System.out.println(prefix + "    " +  "void");
+        } else {
+            for (int i = 0; i < args.size(); i++){
+                args.get(i).print(prefix + "    ");
+            }
+        }
+        System.out.println(prefix + ")");
+    }
 }

@@ -8,4 +8,15 @@ public class VarExpression extends Expression{
         ID = inID;
         expression = inExpression;
     }
+
+    void print(String prefix) {
+        if(expression == null){
+            System.out.println(prefix + ID);
+        }
+        else{
+            System.out.println(prefix + ID + "[");
+            expression.print(prefix + "    ");
+            System.out.println(prefix + "]");
+        }
+    }
 }

@@ -7,4 +7,13 @@ public class Param{
         id = inID;
         bracket = inBracket;
     }
+
+    void print(String prefix){
+        System.out.print(prefix + "int " + id + " ");
+        if(bracket){
+            System.out.println("[]");
+        } else {
+            System.out.println("");
+        }
+    }
 }

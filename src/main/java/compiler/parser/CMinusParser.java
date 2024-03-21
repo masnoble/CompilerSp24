@@ -15,9 +15,9 @@ public class CMinusParser implements Parser {
         myScanner = new CMinusScanner(filename);
     }
 
-    public Program parse() {
+    public Program parse() throws CMinusException {
         // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'parse'");
+        return parseProgram();
     }
     
     public void printTree() {
@@ -555,7 +555,15 @@ public class CMinusParser implements Parser {
 
     
     public static void main(String[] args) {
-        
+        String filename = "Test1";
+        Parser myParser = new CMinusParser("./projectFiles/proj2/" + filename + ".cm");
+
+        try{
+            Program p = myParser.parse();
+        }
+        catch(CMinusException e){
+            System.err.println(e);
+        }
     }
     
 }

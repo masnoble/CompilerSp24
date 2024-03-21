@@ -1,6 +1,6 @@
 package compiler.parser;
 
 public interface Parser {
-    public Program parse();
+    public Program parse() throws CMinusException;
     public void printTree();
 }

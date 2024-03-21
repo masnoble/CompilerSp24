@@ -11,4 +11,9 @@ public class BinaryExpression extends Expression{
         operator = inOperator;
     }
     
+    void print(String prefix){
+        System.out.println(prefix + operator);
+        lhs.print(prefix + "    ");
+        rhs.print(prefix + "    ");
+    }
 }
