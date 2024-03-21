@@ -383,6 +383,14 @@ public class CMinusParser implements Parser {
             case TIMES_TOKEN:
             case DIVIDE_TOKEN:
             case COMMA_TOKEN:
+            case PLUS_TOKEN:
+            case MINUS_TOKEN:
+            case LT_TOKEN:
+            case LTE_TOKEN:
+            case GT_TOKEN:
+            case GTE_TOKEN:
+            case EQ_TOKEN:
+            case NOT_EQ_TOKEN:
                 return parseSimpleExpressionPrime(E);
             default: 
                 throw new CMinusException("Parse Expression 2 Prime");
