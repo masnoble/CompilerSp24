@@ -265,6 +265,8 @@ public class CMinusParser implements Parser {
 
         Expression e = parseExpression();
 
+        matchToken(TokenType.RPAREN_TOKEN);
+
         Statement s1 = parseStatement();
 
         if(myScanner.viewNextToken().getType() == TokenType.ELSE_TOKEN){
@@ -353,6 +355,14 @@ public class CMinusParser implements Parser {
             case TIMES_TOKEN:
             case DIVIDE_TOKEN:
             case COMMA_TOKEN:
+            case PLUS_TOKEN:
+            case MINUS_TOKEN:
+            case LT_TOKEN:
+            case LTE_TOKEN:
+            case GT_TOKEN:
+            case GTE_TOKEN:
+            case EQ_TOKEN:
+            case NOT_EQ_TOKEN:
                 return parseSimpleExpressionPrime(new VarExpression(ID, null));            
             default:
                 throw new CMinusException("Parse Expression Prime");
@@ -478,7 +488,10 @@ public class CMinusParser implements Parser {
             case LBRACKET_TOKEN:
                 return new VarExpression(id, parseExpression());
             case LPAREN_TOKEN:
-                return new CallExpression(id, parseArgs());
+                matchToken(TokenType.LPAREN_TOKEN);
+                ArrayList<Expression> args = parseArgs();
+                matchToken(TokenType.RPAREN_TOKEN);
+                return new CallExpression(id, args);
             case RPAREN_TOKEN:
             case RBRACKET_TOKEN:
             case SEMI_TOKEN:
@@ -543,7 +556,7 @@ public class CMinusParser implements Parser {
         ArrayList<Expression> args = new ArrayList<Expression>();
         TokenType currTok = myScanner.viewNextToken().getType();
         if(currTok == TokenType.ID_TOKEN || currTok == TokenType.NUM_TOKEN || currTok == TokenType.LPAREN_TOKEN){
-            parseExpression();
+            args.add(parseExpression());
         }
         while(myScanner.viewNextToken().getType() == TokenType.COMMA_TOKEN){
             matchToken(TokenType.COMMA_TOKEN);
@@ -560,10 +573,12 @@ public class CMinusParser implements Parser {
 
         try{
             Program p = myParser.parse();
+            p.print();
         }
         catch(CMinusException e){
             System.err.println(e);
         }
+
     }
     
 }

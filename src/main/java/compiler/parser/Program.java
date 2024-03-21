@@ -7,6 +7,10 @@ public class Program{
 
 
     void print(){
-
+        System.out.println("Program{");
+        for(int i = 0; i < declarations.size(); i++){
+            declarations.get(i).print("    ");
+        }
+        System.out.println("}");
     }
 }

@@ -13,7 +13,7 @@ public class SelectionStatement extends Statement{
     void print(String prefix) {
         System.out.println(prefix + "if(");
         expression.print(prefix + "    ");
-        System.out.println(prefix + "{");
+        System.out.println(prefix + "){");
         statement.print(prefix + "    ");
         System.out.println(prefix + "}");
 

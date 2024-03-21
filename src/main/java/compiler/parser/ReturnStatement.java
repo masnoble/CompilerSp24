@@ -7,10 +7,9 @@ public class ReturnStatement extends Statement{
     }
 
     void print(String prefix) {
-        System.out.print(prefix + "return");
+        System.out.println(prefix + "return");
 
         if(expression != null){
-            System.out.print(" ");
             expression.print(prefix + "    ");
         }
 

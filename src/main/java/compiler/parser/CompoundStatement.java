@@ -18,7 +18,7 @@ public class CompoundStatement extends Statement{
         for (int i = 0; i < statements.size(); i++){
             statements.get(i).print(prefix + "    ");
         }
-        System.out.println(prefix + ")");
+        System.out.println(prefix + "}");
     }
 
 }
