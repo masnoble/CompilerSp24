@@ -14,11 +14,16 @@ public class FunctionDeclaration extends Declaration{
 
     @Override
     void print(String prefix){
-        System.out.println(prefix + ID + "(");
-        for (int i = 0; i < params.size(); i++){
-            params.get(i).print(prefix + "    ");
+        if(params.isEmpty()){
+            System.out.println(prefix + ID + "( )");
         }
-        System.out.println(prefix + ")");
+        else{
+            System.out.println(prefix + ID + "(");
+            for (int i = 0; i < params.size(); i++){
+                params.get(i).print(prefix + "    ");
+            }
+            System.out.println(prefix + ")");
+        }
         compoundStatement.print(prefix + "    ");
     }
 }

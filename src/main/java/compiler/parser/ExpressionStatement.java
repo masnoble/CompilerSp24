@@ -7,9 +7,8 @@ public class ExpressionStatement extends Statement{
     }
 
     void print(String prefix){
-        System.out.println(prefix + "[");
-        expression.print(prefix + "    ");
-        System.out.println(prefix + "]");
+        expression.print(prefix);
+        System.out.println(prefix + ";");
     }
 }
     

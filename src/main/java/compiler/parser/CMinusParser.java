@@ -10,26 +10,26 @@ import compiler.scanner.Token.TokenType;
 public class CMinusParser implements Parser {
     
     private Scanner myScanner;
+    private Program myProgram;
 
     CMinusParser(String filename){
         myScanner = new CMinusScanner(filename);
     }
 
     public Program parse() throws CMinusException {
-        // TODO Auto-generated method stub
-        return parseProgram();
+        myProgram = parseProgram();
+        
+        return myProgram;
     }
     
     public void printTree() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'printTree'");
+        myProgram.print();
     }
     
     private Token matchToken(TokenType tokenType) throws CMinusException {
-
         Token tkn = myScanner.getNextToken();
         if (tkn.getType() != tokenType){
-            throw new CMinusException("Exception message");
+            throw new CMinusException("matchToken exception: expected " + tokenType + " got "+ tkn.getType());
         }
         return tkn;
     }
@@ -57,7 +57,7 @@ public class CMinusParser implements Parser {
             case TIMES_TOKEN:
                 return "*";
             default:
-                throw new CMinusException("Exception message");
+                throw new CMinusException("getString Exception: Expected Token not Found");
         }
 
     }
@@ -93,7 +93,7 @@ public class CMinusParser implements Parser {
             return parseDeclarationPrime(IV, id);
         } else {
             //error
-            return null;
+            throw new CMinusException("parseDeclaration Exception");
         }
     }
 
@@ -113,8 +113,7 @@ public class CMinusParser implements Parser {
                 return parseFunDeclarationPrime(IV, ID);
             default:
                 // err
-                System.err.println("Declaration Prime Error");
-                return null;
+                throw new CMinusException("parseDeclarationPrime Exception");
         }        
     }
 
@@ -138,8 +137,7 @@ public class CMinusParser implements Parser {
                 return parseParamList();
         
             default:
-                System.err.println("Parse Param Error");
-                return null;
+                throw new CMinusException("parseParams Exception");
         }
     }
 
@@ -183,8 +181,7 @@ public class CMinusParser implements Parser {
         
         ArrayList<VarDeclaraction> decls = new ArrayList<VarDeclaraction>();
 
-        while(myScanner.viewNextToken().getType() == TokenType.COMMA_TOKEN){
-            matchToken(TokenType.COMMA_TOKEN);
+        while(myScanner.viewNextToken().getType() == TokenType.INT_TOKEN){
             decls.add(parseLocaDeclaraction()); 
         }
 
@@ -225,6 +222,8 @@ public class CMinusParser implements Parser {
 
     private Statement parseStatement() throws CMinusException{
         switch (myScanner.viewNextToken().getType()) {
+            case LCURLEY_TOKEN:
+                return parseCompoundStatement();
             case SEMI_TOKEN:
             case ID_TOKEN:
             case NUM_TOKEN:
@@ -237,7 +236,7 @@ public class CMinusParser implements Parser {
             case RETURN_TOKEN:
                 return parseReturnStatement();
             default:
-                throw new CMinusException("Parse Statement Error");                
+                throw new CMinusException("parseStatement Exception");                
         }
     }
     
@@ -327,7 +326,7 @@ public class CMinusParser implements Parser {
                 matchToken(TokenType.RPAREN_TOKEN);
                 return parseSimpleExpressionPrime(e);
             default:
-                throw new CMinusException("Parse Expression");
+                throw new CMinusException("parseExpression Exception");
         }
         
     }
@@ -365,7 +364,7 @@ public class CMinusParser implements Parser {
             case NOT_EQ_TOKEN:
                 return parseSimpleExpressionPrime(new VarExpression(ID, null));            
             default:
-                throw new CMinusException("Parse Expression Prime");
+                throw new CMinusException("parseExpressionPrime Exception");
         }
         
     }
@@ -393,7 +392,7 @@ public class CMinusParser implements Parser {
             case NOT_EQ_TOKEN:
                 return parseSimpleExpressionPrime(E);
             default: 
-                throw new CMinusException("Parse Expression 2 Prime");
+                throw new CMinusException("parseExpression2Prime Exception");
         }
         
     }
@@ -405,6 +404,7 @@ public class CMinusParser implements Parser {
         
         switch (myScanner.viewNextToken().getType()) {
             case GT_TOKEN:
+            case GTE_TOKEN:
             case LT_TOKEN:
             case LTE_TOKEN:
             case NOT_EQ_TOKEN:
@@ -487,7 +487,7 @@ public class CMinusParser implements Parser {
                 int num = Integer.parseInt((String) matchToken(TokenType.NUM_TOKEN).getData());
                 return new NumExpression(num);
             default:
-                throw new CMinusException("Parse Factor");
+                throw new CMinusException("parseFactor Exception");
         }
     }
 
@@ -511,7 +511,7 @@ public class CMinusParser implements Parser {
             case MINUS_TOKEN:
                 return new VarExpression(id, null);
             default: 
-                throw new CMinusException("Parse Varcall Error");
+                throw new CMinusException("parseVarCall Exception");
         }
          
     }
@@ -531,34 +531,10 @@ public class CMinusParser implements Parser {
             case EQ_TOKEN:
                 return matchToken(TokenType.EQ_TOKEN).getType();
             default:
-                System.err.println("Error parse addop");
+                System.err.println("parseRelop Exception");
                 return null;
         }
     }    
-
-    private TokenType parseAddop() throws CMinusException{
-        switch (myScanner.viewNextToken().getType()) {
-            case PLUS_TOKEN:
-                return matchToken(TokenType.PLUS_TOKEN).getType();
-            case MINUS_TOKEN:
-                return matchToken(TokenType.MINUS_TOKEN).getType();
-            default:
-                System.err.println("Error parse addop");
-                return null;
-        }
-    }
-
-    private TokenType parseMulop() throws CMinusException{
-        switch (myScanner.viewNextToken().getType()) {
-            case TIMES_TOKEN:
-                return matchToken(TokenType.TIMES_TOKEN).getType();
-            case DIVIDE_TOKEN:
-                return matchToken(TokenType.DIVIDE_TOKEN).getType();
-            default:
-                System.err.println("Error parse mulop");
-                return null;
-        }
-    }
 
     private ArrayList<Expression> parseArgs() throws CMinusException{
         ArrayList<Expression> args = new ArrayList<Expression>();
@@ -576,17 +552,17 @@ public class CMinusParser implements Parser {
 
     
     public static void main(String[] args) {
-        String filename = "Test1";
+        String filename = "ben";
         Parser myParser = new CMinusParser("./projectFiles/proj2/" + filename + ".cm");
 
         try{
-            Program p = myParser.parse();
-            p.print();
+            myParser.parse();
+            myParser.printTree();
         }
         catch(CMinusException e){
             System.err.println(e);
         }
-
+        
     }
     
 }

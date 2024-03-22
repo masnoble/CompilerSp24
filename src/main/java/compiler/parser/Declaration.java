@@ -28,6 +28,6 @@ public class Declaration{
             arr = "[" + num + "]";
         }
 
-        System.out.println(prefix + vi + " " + ID + arr);
+        System.out.println(prefix + vi + " " + ID + arr + ";");
     }
 }
