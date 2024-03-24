@@ -1,0 +1,4 @@
+void temp (void){
+    int temp[10];
+    return;
+}

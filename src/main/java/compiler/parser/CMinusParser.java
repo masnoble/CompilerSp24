@@ -196,8 +196,8 @@ public class CMinusParser implements Parser {
         if(myScanner.viewNextToken().getType() == TokenType.LBRACKET_TOKEN){
             matchToken(TokenType.LBRACKET_TOKEN);
             int num = Integer.parseInt((String) matchToken(TokenType.NUM_TOKEN).getData());
-            matchToken(TokenType.LBRACKET_TOKEN);
-            
+            matchToken(TokenType.RBRACKET_TOKEN);
+            matchToken(TokenType.SEMI_TOKEN);
             return new VarDeclaraction(true, id, num);
         }
 
@@ -552,7 +552,7 @@ public class CMinusParser implements Parser {
 
     
     public static void main(String[] args) {
-        String filename = "ben";
+        String filename = "test4";
         Parser myParser = new CMinusParser("./projectFiles/proj2/" + filename + ".cm");
 
         try{

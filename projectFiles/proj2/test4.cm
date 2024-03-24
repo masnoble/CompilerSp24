@@ -1,0 +1,11 @@
+int david;
+int josh;
+int lainy;
+int team;
+
+void main (void) {
+david = 6;
+josh = 7;
+lainy = 11;
+team = david + josh + lainy;
+}

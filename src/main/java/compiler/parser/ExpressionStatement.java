@@ -7,7 +7,9 @@ public class ExpressionStatement extends Statement{
     }
 
     void print(String prefix){
-        expression.print(prefix);
+        if(expression != null){
+            expression.print(prefix);
+        }
         System.out.println(prefix + ";");
     }
 }
