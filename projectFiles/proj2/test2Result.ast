@@ -1,0 +1,8 @@
+Program{    
+temp( )    
+    {    
+        int temp[10];    
+        return    
+        ;    
+    }
+}

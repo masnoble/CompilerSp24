@@ -1,5 +1,8 @@
 package compiler.parser;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import compiler.scanner.CMinusScanner;
@@ -22,8 +25,8 @@ public class CMinusParser implements Parser {
         return myProgram;
     }
     
-    public void printTree() {
-        myProgram.print();
+    public void printTree(BufferedWriter writer)  throws IOException {
+        myProgram.print(writer);
     }
     
     private Token matchToken(TokenType tokenType) throws CMinusException {
@@ -552,17 +555,19 @@ public class CMinusParser implements Parser {
 
     
     public static void main(String[] args) {
-        String filename = "test4";
+        String filename = "test";
         Parser myParser = new CMinusParser("./projectFiles/proj2/" + filename + ".cm");
+        BufferedWriter writer;
 
         try{
+            writer = new BufferedWriter(new FileWriter("./projectFiles/proj2/" + filename + "Result.ast"));
             myParser.parse();
-            myParser.printTree();
+            myParser.printTree(writer);
+            writer.close();
         }
-        catch(CMinusException e){
+        catch(Exception e){
             System.err.println(e);
         }
-        
     }
     
 }

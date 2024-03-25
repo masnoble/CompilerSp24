@@ -1,5 +1,8 @@
 package compiler.parser;
 
+import java.io.BufferedWriter;
+import java.io.IOException;
+
 public class IterationStatement extends Statement{
     Expression expression;
     Statement statement;
@@ -8,11 +11,11 @@ public class IterationStatement extends Statement{
         statement = inStatement;
     }
 
-    void print(String prefix){
-        System.out.println(prefix + "while (");
-        expression.print(prefix + "    ");
-        System.out.println(prefix + ")");
-        statement.print(prefix + "    ");
+    void print(String prefix, BufferedWriter writer) throws IOException{
+        writer.write(prefix + "while (");
+        expression.print(prefix + "    ", writer);
+        writer.write(prefix + ")");
+        statement.print(prefix + "    ", writer);
     }
 
 }

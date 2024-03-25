@@ -1,5 +1,8 @@
 package compiler.parser;
 
+import java.io.BufferedWriter;
+import java.io.IOException;
+
 public class BinaryExpression extends Expression{
     Expression lhs;
     Expression rhs;
@@ -11,9 +14,9 @@ public class BinaryExpression extends Expression{
         operator = inOperator;
     }
     
-    void print(String prefix){
-        System.out.println(prefix + operator);
-        lhs.print(prefix + "    ");
-        rhs.print(prefix + "    ");
+    void print(String prefix, BufferedWriter writer) throws IOException{
+        writer.write(prefix + operator);
+        lhs.print(prefix + "    ", writer);
+        rhs.print(prefix + "    ", writer);
     }
 }

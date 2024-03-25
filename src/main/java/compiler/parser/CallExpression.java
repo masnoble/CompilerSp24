@@ -1,6 +1,8 @@
 package compiler.parser;
 
+import java.io.BufferedWriter;
 import java.util.ArrayList;
+import java.io.IOException;
 
 public class CallExpression extends Expression{
     String ID;
@@ -11,15 +13,15 @@ public class CallExpression extends Expression{
         args = inArgs;
     }
 
-    void print(String prefix){
-        System.out.println(prefix + ID + "(");
+    void print(String prefix, BufferedWriter writer) throws IOException{
+        writer.write(prefix + ID + "(");
         if(args.isEmpty()){
-            System.out.println(prefix + "    " +  "void");
+            writer.write(prefix + "    " +  "void");
         } else {
             for (int i = 0; i < args.size(); i++){
-                args.get(i).print(prefix + "    ");
+                args.get(i).print(prefix + "    ", writer);
             }
         }
-        System.out.println(prefix + ")");
+        writer.write(prefix + ")");
     }
 }

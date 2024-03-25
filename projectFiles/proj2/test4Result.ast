@@ -1,0 +1,29 @@
+Program{    
+int david;    
+int josh;    
+int lainy;    
+int team;    
+main( )    
+    {    
+        =    
+            david    
+            6    
+        ;    
+        =    
+            josh    
+            7    
+        ;    
+        =    
+            lainy    
+            11    
+        ;    
+        =    
+            team    
+            +    
+                +    
+                    david    
+                    josh    
+                lainy    
+        ;    
+    }
+}

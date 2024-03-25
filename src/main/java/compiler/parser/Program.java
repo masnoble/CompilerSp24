@@ -1,16 +1,18 @@
 package compiler.parser;
 
 import java.util.ArrayList;
+import java.io.BufferedWriter;
+import java.io.IOException;
 
 public class Program{
     ArrayList<Declaration> declarations = new ArrayList<>();
 
 
-    void print(){
-        System.out.println("Program{");
+    void print(BufferedWriter writer)throws IOException{
+        writer.write("Program{");
         for(int i = 0; i < declarations.size(); i++){
-            declarations.get(i).print("    ");
+            declarations.get(i).print("    " + "\r\n", writer);
         }
-        System.out.println("}");
+        writer.write("\r\n"+"}");
     }
 }

@@ -1,5 +1,7 @@
 package compiler.parser;
 
+import java.io.BufferedWriter;
+import java.io.IOException;
 
 public class Declaration{
     boolean voidint; //if false is void, if true is int
@@ -12,7 +14,7 @@ public class Declaration{
         num = number;
     }
     
-    void print(String prefix){
+    void print(String prefix , BufferedWriter writer) throws IOException{
         String vi;
 
         if(voidint){
@@ -28,6 +30,6 @@ public class Declaration{
             arr = "[" + num + "]";
         }
 
-        System.out.println(prefix + vi + " " + ID + arr + ";");
+        writer.write(prefix + vi + " " + ID + arr + ";");
     }
 }

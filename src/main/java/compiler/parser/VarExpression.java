@@ -1,5 +1,8 @@
 package compiler.parser;
 
+import java.io.BufferedWriter;
+import java.io.IOException;
+
 public class VarExpression extends Expression{
     String ID;
     Expression expression;
@@ -9,14 +12,14 @@ public class VarExpression extends Expression{
         expression = inExpression;
     }
 
-    void print(String prefix) {
+    void print(String prefix, BufferedWriter writer) throws IOException {
         if(expression == null){
-            System.out.println(prefix + ID);
+            writer.write(prefix + ID);
         }
         else{
-            System.out.println(prefix + ID + "[");
-            expression.print(prefix + "    ");
-            System.out.println(prefix + "]");
+            writer.write(prefix + ID + "[");
+            expression.print(prefix + "    ", writer);
+            writer.write(prefix + "]");
         }
     }
 }

@@ -1,5 +1,8 @@
 package compiler.parser;
 
+import java.io.BufferedWriter;
+import java.io.IOException;
+
 public class AssignExpression extends Expression {
     VarExpression lhs;
     Expression rhs;
@@ -8,9 +11,9 @@ public class AssignExpression extends Expression {
         rhs = inRHS;
     }
 
-    void print(String prefix){
-        System.out.println(prefix + "=");
-        lhs.print(prefix + "    ");
-        rhs.print(prefix + "    ");
+    void print(String prefix, BufferedWriter writer) throws IOException{
+        writer.write(prefix + "=");
+        lhs.print(prefix + "    ", writer);
+        rhs.print(prefix + "    ", writer);
     }
 }

@@ -1,5 +1,8 @@
 package compiler.parser;
 
+import java.io.BufferedWriter;
+import java.io.IOException;
+
 public class Param{
     String id;
     boolean bracket;
@@ -8,12 +11,12 @@ public class Param{
         bracket = inBracket;
     }
 
-    void print(String prefix){
-        System.out.print(prefix + "int " + id + " ");
+    void print(String prefix, BufferedWriter writer) throws IOException{
+        writer.write(prefix + "int " + id + " ");
         if(bracket){
-            System.out.println("[]");
+            writer.write("[]");
         } else {
-            System.out.println("");
+            writer.write("");
         }
     }
 }

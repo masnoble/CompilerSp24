@@ -1,5 +1,8 @@
 package compiler.parser;
 
+import java.io.BufferedWriter;
+import java.io.IOException;
+
 public class SelectionStatement extends Statement{
     Expression expression;
     Statement statement;
@@ -10,17 +13,17 @@ public class SelectionStatement extends Statement{
         elseStatement = inElseStatement;
     }
 
-    void print(String prefix) {
-        System.out.println(prefix + "if(");
-        expression.print(prefix + "    ");
-        System.out.println(prefix + "){");
-        statement.print(prefix + "    ");
-        System.out.println(prefix + "}");
+    void print(String prefix, BufferedWriter writer) throws IOException{
+        writer.write(prefix + "if(");
+        expression.print(prefix + "    ", writer);
+        writer.write(prefix + "){");
+        statement.print(prefix + "    ", writer);
+        writer.write(prefix + "}");
 
         if(elseStatement != null){
-            System.out.println(prefix + "else{");
-            elseStatement.print(prefix + "    ");
-            System.out.println(prefix + "}");
+            writer.write(prefix + "else{");
+            elseStatement.print(prefix + "    ", writer);
+            writer.write(prefix + "}");
         }
     }
 

@@ -1,6 +1,8 @@
 package compiler.parser;
 
+import java.io.BufferedWriter;
 import java.util.ArrayList;
+import java.io.IOException;
 
 public class CompoundStatement extends Statement{
     ArrayList<VarDeclaraction> localDeclaration;
@@ -10,15 +12,15 @@ public class CompoundStatement extends Statement{
         statements = inStatement;
     }
 
-    void print(String prefix){
-        System.out.println(prefix + "{");
+    void print(String prefix , BufferedWriter writer) throws IOException{
+        writer.write(prefix + "{");
         for (int i = 0; i < localDeclaration.size(); i++){
-            localDeclaration.get(i).print(prefix + "    ");
+            localDeclaration.get(i).print(prefix + "    ", writer);
         }
         for (int i = 0; i < statements.size(); i++){
-            statements.get(i).print(prefix + "    ");
+            statements.get(i).print(prefix + "    ", writer);
         }
-        System.out.println(prefix + "}");
+        writer.write(prefix + "}");
     }
 
 }

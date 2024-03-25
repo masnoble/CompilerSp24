@@ -1,6 +1,8 @@
 package compiler.parser;
 
+import java.io.BufferedWriter;
 import java.util.ArrayList;
+import java.io.IOException;
 
 public class FunctionDeclaration extends Declaration{
     ArrayList<Param> params;
@@ -13,17 +15,17 @@ public class FunctionDeclaration extends Declaration{
     }
 
     @Override
-    void print(String prefix){
+    void print(String prefix, BufferedWriter writer) throws IOException{
         if(params.isEmpty()){
-            System.out.println(prefix + ID + "( )");
+            writer.write(prefix + ID + "( )");
         }
         else{
-            System.out.println(prefix + ID + "(");
+            writer.write(prefix + ID + "(");
             for (int i = 0; i < params.size(); i++){
-                params.get(i).print(prefix + "    ");
+                params.get(i).print(prefix + "    ", writer);
             }
-            System.out.println(prefix + ")");
+            writer.write(prefix + ")");
         }
-        compoundStatement.print(prefix + "    ");
+        compoundStatement.print(prefix + "    ", writer);
     }
 }
