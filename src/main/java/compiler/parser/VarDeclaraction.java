@@ -6,7 +6,6 @@ import compiler.compiler.CMinusCompiler;
 import compiler.lowlevel.CodeItem;
 import compiler.lowlevel.Data;
 import compiler.lowlevel.Function;
-import compiler.lowlevel.Operation;
 
 public class VarDeclaraction extends Declaration{
     VarDeclaraction(boolean VI, String identifier, int number){

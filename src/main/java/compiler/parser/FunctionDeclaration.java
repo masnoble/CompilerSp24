@@ -4,10 +4,10 @@ import java.io.BufferedWriter;
 import java.util.ArrayList;
 
 import compiler.lowlevel.BasicBlock;
-import compiler.lowlevel.Data;
 import compiler.lowlevel.FuncParam;
 import compiler.lowlevel.Function;
 import compiler.lowlevel.Operation;
+import compiler.lowlevel.Operation.OperationType;
 
 import java.io.IOException;
 
@@ -48,11 +48,12 @@ public class FunctionDeclaration extends Declaration{
         compoundStatement.genLLCode(f);
 
 
-        BasicBlock exitBlock = new BasicBlock(f);
-        Operation exitOper = new Operation(Operation.OperationType.FUNC_EXIT, exitBlock);
-        exitBlock.appendOper(exitOper);
-
-        f.appendBlock(exitBlock);
+        
+        if(f.getLastBlock().getFirstOper().getType() != OperationType.FUNC_EXIT){
+            BasicBlock returnBlock =  f.genReturnBlock();
+    
+            f.appendBlock(returnBlock);
+        }
 
         return f;
     }

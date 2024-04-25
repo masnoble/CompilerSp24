@@ -5,7 +5,6 @@ import java.io.IOException;
 
 import compiler.lowlevel.CodeItem;
 import compiler.lowlevel.Data;
-import compiler.lowlevel.Function;
 
 public class Declaration{
     boolean voidint; //if false is void, if true is int

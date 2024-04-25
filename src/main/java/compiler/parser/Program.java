@@ -3,8 +3,6 @@ package compiler.parser;
 import java.util.ArrayList;
 
 import compiler.lowlevel.CodeItem;
-import compiler.lowlevel.Function;
-
 import java.io.BufferedWriter;
 import java.io.IOException;
 
