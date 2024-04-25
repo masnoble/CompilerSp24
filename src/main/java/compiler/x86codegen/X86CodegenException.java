@@ -1,4 +1,4 @@
-package x86codegen;
+package compiler.x86codegen;
 
 public class X86CodegenException extends RuntimeException{
 

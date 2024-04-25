@@ -1,4 +1,4 @@
-package lowlevel;
+package compiler.lowlevel;
 
 import java.io.PrintWriter;
 

@@ -1,6 +1,6 @@
-package x86codegen;
+package compiler.x86codegen;
 
-import lowlevel.*;
+import compiler.lowlevel.*;
 import java.io.PrintWriter;
 
 public class X86AssemblyGenerator {

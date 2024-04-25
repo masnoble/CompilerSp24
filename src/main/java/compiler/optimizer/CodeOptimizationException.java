@@ -1,4 +1,4 @@
-package optimizer;
+package compiler.optimizer;
 
 /**
  * This is a general-purpose exception for use by optimizer methods.

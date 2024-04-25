@@ -3,6 +3,8 @@ package compiler.parser;
 import java.io.BufferedWriter;
 import java.io.IOException;
 
+import compiler.lowlevel.Function;
+
 public class VarExpression extends Expression{
     String ID;
     Expression expression;
@@ -10,6 +12,12 @@ public class VarExpression extends Expression{
     VarExpression(String inID, Expression inExpression){
         ID = inID;
         expression = inExpression;
+    }
+
+    int genLLCode(Function f) {
+        return (int)f.getTable().get(ID);
+
+        //TODO: HANDLE GLOBALS
     }
 
     void print(String prefix, BufferedWriter writer) throws IOException {

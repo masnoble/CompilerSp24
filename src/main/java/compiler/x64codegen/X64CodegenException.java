@@ -1,6 +1,6 @@
-package x64codegen;
+package compiler.x64codegen;
 
-import x86codegen.*;
+import compiler.x86codegen.*;
 
 public class X64CodegenException extends RuntimeException{
 

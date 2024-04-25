@@ -1,6 +1,6 @@
-package optimizer;
+package compiler.optimizer;
 
-import lowlevel.*;
+import compiler.lowlevel.*;
 
 public class JumpOptimizer {
 

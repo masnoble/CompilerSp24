@@ -1,4 +1,4 @@
-package lowlevel;
+package compiler.lowlevel;
 
 /**
  * This is a general-purpose exception for use by low-level code methods.

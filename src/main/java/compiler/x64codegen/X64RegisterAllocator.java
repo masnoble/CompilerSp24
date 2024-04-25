@@ -1,10 +1,10 @@
-package x64codegen;
+package compiler.x64codegen;
 
-import x86codegen.*;
-import lowlevel.*;
+import compiler.x86codegen.*;
+import compiler.lowlevel.*;
 import java.util.LinkedList;
 import java.util.Iterator;
-import dataflow.BitArraySet;
+import compiler.dataflow.BitArraySet;
 
 public class X64RegisterAllocator {
 

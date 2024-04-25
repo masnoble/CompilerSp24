@@ -1,6 +1,6 @@
-package dataflow;
+package compiler.dataflow;
 
-import lowlevel.*;
+import compiler.lowlevel.*;
 
 public class DefUseAnalysis {
 

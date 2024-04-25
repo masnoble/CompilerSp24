@@ -2,6 +2,9 @@ package compiler.parser;
 
 import java.io.BufferedWriter;
 import java.util.ArrayList;
+
+import compiler.lowlevel.Function;
+
 import java.io.IOException;
 
 public class CallExpression extends Expression{
@@ -23,5 +26,11 @@ public class CallExpression extends Expression{
             }
         }
         writer.write(prefix + ")");
+    }
+
+    @Override
+    int genLLCode(Function f) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'genLLCode'");
     }
 }

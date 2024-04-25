@@ -15,7 +15,7 @@ public class CMinusParser implements Parser {
     private Scanner myScanner;
     private Program myProgram;
 
-    CMinusParser(String filename){
+    public CMinusParser(String filename){
         myScanner = new CMinusScanner(filename);
     }
 

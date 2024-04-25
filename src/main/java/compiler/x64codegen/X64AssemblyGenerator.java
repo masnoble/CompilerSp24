@@ -1,7 +1,7 @@
-package x64codegen;
+package compiler.x64codegen;
 
-import x86codegen.*;
-import lowlevel.*;
+import compiler.x86codegen.*;
+import compiler.lowlevel.*;
 import java.io.PrintWriter;
 
 public class X64AssemblyGenerator {

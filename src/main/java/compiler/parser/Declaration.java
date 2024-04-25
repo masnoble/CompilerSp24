@@ -3,6 +3,10 @@ package compiler.parser;
 import java.io.BufferedWriter;
 import java.io.IOException;
 
+import compiler.lowlevel.CodeItem;
+import compiler.lowlevel.Data;
+import compiler.lowlevel.Function;
+
 public class Declaration{
     boolean voidint; //if false is void, if true is int
     String ID; 
@@ -13,6 +17,20 @@ public class Declaration{
         ID = identifier;
         num = number;
     }
+
+    //WE MAY OR MAY NOT NEED THIS IMPLMENTED. COULD BE ABSTRACT
+    CodeItem genLLCode(){
+        int type;
+
+        if(voidint){
+            type = 1;
+        }
+        else{
+            type = 0;
+        }
+        return new Data(type, ID);
+    }
+
     
     void print(String prefix , BufferedWriter writer) throws IOException{
         String vi;

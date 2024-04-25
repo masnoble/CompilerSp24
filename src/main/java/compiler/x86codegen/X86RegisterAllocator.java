@@ -1,9 +1,9 @@
-package x86codegen;
+package compiler.x86codegen;
 
-import lowlevel.*;
+import compiler.lowlevel.*;
 import java.util.LinkedList;
 import java.util.Iterator;
-import dataflow.BitArraySet;
+import compiler.dataflow.BitArraySet;
 
 public class X86RegisterAllocator {
 

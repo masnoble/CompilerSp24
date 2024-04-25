@@ -3,6 +3,8 @@ package compiler.parser;
 import java.io.BufferedWriter;
 import java.io.IOException;
 
+import compiler.lowlevel.Function;
+
 public class SelectionStatement extends Statement{
     Expression expression;
     Statement statement;
@@ -25,6 +27,12 @@ public class SelectionStatement extends Statement{
             elseStatement.print(prefix + "    ", writer);
             writer.write(prefix + "}");
         }
+    }
+
+    @Override
+    void genLLCode(Function f) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'genLLCode'");
     }
 
 }

@@ -1,14 +1,14 @@
-package compiler;
+package compiler.compiler;
 
-import x64codegen.X64AssemblyGenerator;
-import parser.*;
-import lowlevel.*;
+import compiler.x64codegen.X64AssemblyGenerator;
+import compiler.parser.*;
+import compiler.lowlevel.*;
 import java.util.*;
 import java.io.*;
-import optimizer.*;
-import x86codegen.*;
-import x64codegen.*;
-import dataflow.*;
+import compiler.optimizer.*;
+import compiler.x86codegen.*;
+import compiler.x64codegen.*;
+import compiler.dataflow.*;
 
 public class CMinusCompiler implements Compiler {
 
@@ -27,12 +27,12 @@ public class CMinusCompiler implements Compiler {
 
     public void compile(String filePrefix) {
 
-        String fileName = filePrefix + ".c";
+        String fileName = filePrefix + ".cm";
         try {
             Parser myParser = new CMinusParser(fileName);
 
             Program parseTree = myParser.parse();
-            myParser.printAST(parseTree);
+            // myParser.printTree(parseTree);
 
             CodeItem lowLevelCode = parseTree.genLLCode();
 
@@ -119,12 +119,14 @@ public class CMinusCompiler implements Compiler {
             }
 
         } catch (IOException ioe) {
+        } catch (CMinusException CMinusException){
+            
         }
 
     }
 
     public static void main(String[] args) {
-        String filePrefix = "test5";
+        String filePrefix = "./projectFiles/proj3/"+"test";
         CMinusCompiler myCompiler = new CMinusCompiler();
         myCompiler.setGenX64Code(true);
         myCompiler.compile(filePrefix);

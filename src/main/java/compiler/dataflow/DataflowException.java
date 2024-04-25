@@ -1,4 +1,4 @@
-package dataflow;
+package compiler.dataflow;
 
 public class DataflowException extends RuntimeException {
 

@@ -2,6 +2,13 @@ package compiler.parser;
 
 import java.io.BufferedWriter;
 import java.util.ArrayList;
+
+import compiler.lowlevel.BasicBlock;
+import compiler.lowlevel.Data;
+import compiler.lowlevel.FuncParam;
+import compiler.lowlevel.Function;
+import compiler.lowlevel.Operation;
+
 import java.io.IOException;
 
 public class FunctionDeclaration extends Declaration{
@@ -12,6 +19,42 @@ public class FunctionDeclaration extends Declaration{
         super(IV, ID, 0);
         params = inParams;
         compoundStatement = inCS;
+    }
+
+    Function genLLCode() {
+        int type;
+
+        if(voidint){
+            type = 1;
+        }
+        else{
+            type = 0;
+        }
+        Function f = new Function(type, ID);
+
+        if (params.size() > 0){
+            FuncParam param = new FuncParam(1, params.get(0).id);
+            f.setFirstParam(param);
+            for(int i = 1; i < params.size(); i++){
+                param.setNextParam(new FuncParam(1, params.get(i).id));
+            }
+        }
+
+        f.createBlock0();
+        BasicBlock block = new BasicBlock(f);
+        f.appendBlock(block);
+
+        f.setCurrBlock(block);
+        compoundStatement.genLLCode(f);
+
+
+        BasicBlock exitBlock = new BasicBlock(f);
+        Operation exitOper = new Operation(Operation.OperationType.FUNC_EXIT, exitBlock);
+        exitBlock.appendOper(exitOper);
+
+        f.appendBlock(exitBlock);
+
+        return f;
     }
 
     @Override

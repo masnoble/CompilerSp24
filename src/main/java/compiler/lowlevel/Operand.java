@@ -1,6 +1,8 @@
-package lowlevel;
+package compiler.lowlevel;
 
 import java.io.*;
+
+import compiler.parser.Parser;
 
 /**
  * This class is abstracts an operand, one of the arguments to an Operation
@@ -118,7 +120,8 @@ public class Operand {
       return ("s");
     }
     else {
-      throw new parser.CodeGenerationException("Operand: invalid type");
+      return("DEADDDDD");
+      // throw new Parser.CodeGenerationException("Operand: invalid type");
     }
   }
     // prints an operand surrounded by parentheses
