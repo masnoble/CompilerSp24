@@ -9,7 +9,18 @@
     (OPER 7 Mov [(r 1)]  [(r 2)])
   )
   (BB 4
-    (OPER 8 Func_Exit []  [])
-    (OPER 9 Return []  [(m RetReg)])
+    (OPER 8 Mov [(r 6)]  [(i 10)])
+    (OPER 9 LT [(r 5)]  [(r 1)(r 6)])
+    (OPER 10 BEQ []  [(r 5)(i 0)(bb 5)])
+    (OPER 11 Mov [(r 8)]  [(i 1)])
+    (OPER 12 Add_I [(r 7)]  [(r 1)(r 8)])
+    (OPER 13 Mov [(r 1)]  [(r 7)])
+    (OPER 14 Jmp []  [(bb 4)])
+  )
+  (BB 5
+  )
+  (BB 6
+    (OPER 15 Func_Exit []  [])
+    (OPER 16 Return []  [(m RetReg)])
   )
 )

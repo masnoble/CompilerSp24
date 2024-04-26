@@ -40,6 +40,6 @@ public class ReturnStatement extends Statement{
             returnBlock.appendOper(oper);
         }
         
-        f.appendBlock(returnBlock);
+        f.appendToCurrentBlock(returnBlock);
     }
 }

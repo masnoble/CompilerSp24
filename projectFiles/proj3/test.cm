@@ -2,4 +2,11 @@ void josh(void){
     int a;
 
     a = 1 + 2;
+
+
+    while(a < 10){
+        a = a + 1;
+    }
+
+    return;
 }

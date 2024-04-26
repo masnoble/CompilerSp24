@@ -55,6 +55,10 @@ public class FunctionDeclaration extends Declaration{
             f.appendBlock(returnBlock);
         }
 
+        if(f.getFirstUnconnectedBlock() != null){
+            f.appendBlock(f.getFirstUnconnectedBlock());
+        }
+
         return f;
     }
 
