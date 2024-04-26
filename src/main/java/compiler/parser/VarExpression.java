@@ -15,7 +15,7 @@ public class VarExpression extends Expression{
     }
 
     int genLLCode(Function f) {
-        return (int)f.getTable().get(ID);
+        return (int) f.getTable().get(ID);
 
         //TODO: HANDLE GLOBALS
     }

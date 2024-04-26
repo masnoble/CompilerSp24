@@ -27,19 +27,19 @@ public class ReturnStatement extends Statement{
     }
 
     void genLLCode(Function f) {
-        BasicBlock returnBlock =  f.genReturnBlock();
         if(expression != null){
             int regNum = expression.genLLCode(f);
             Operand expOperand = new Operand(OperandType.REGISTER, regNum);
-
-
+            
+            
             Operand op = new Operand(OperandType.MACRO, "RetReg");
             Operation oper = new Operation(OperationType.ASSIGN, f.getCurrBlock());
             oper.setSrcOperand(0,expOperand);
             oper.setDestOperand(0,op);
-            returnBlock.appendOper(oper);
+            f.getCurrBlock().appendOper(oper);
         }
         
+        BasicBlock returnBlock =  f.genReturnBlock();
         f.appendToCurrentBlock(returnBlock);
     }
 }

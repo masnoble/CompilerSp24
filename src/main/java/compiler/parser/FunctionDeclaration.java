@@ -33,11 +33,24 @@ public class FunctionDeclaration extends Declaration{
         Function f = new Function(type, ID);
 
         if (params.size() > 0){
-            FuncParam param = new FuncParam(1, params.get(0).id);
+            String paramId = params.get(0).id;
+
+            FuncParam param = new FuncParam(1, paramId);
             f.setFirstParam(param);
+            
+            int reg = f.getNewRegNum();
+            f.getTable().put(paramId, reg);
+
             for(int i = 1; i < params.size(); i++){
-                param.setNextParam(new FuncParam(1, params.get(i).id));
+                paramId = params.get(i).id;
+                
+                param.setNextParam(new FuncParam(1, paramId));
+                
+                reg = f.getNewRegNum();
+                f.getTable().put(paramId, reg);
             }
+
+
         }
 
         f.createBlock0();

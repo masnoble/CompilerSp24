@@ -17,6 +17,7 @@ public class CompoundStatement extends Statement{
     }
 
     void genLLCode(Function f){
+
         for(int i = 0; i < localDeclaration.size(); i++){
             localDeclaration.get(i).genLLCode(f);
         }

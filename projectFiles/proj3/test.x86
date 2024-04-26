@@ -1,24 +1,47 @@
-(FUNCTION  josh  []
+(FUNCTION  josh  [(int b) (int d)]
+  (BB 2
+    (OPER 16 Mov [(r 1)]  [(m EDI)])
+    (OPER 17 Mov [(r 3)]  [(m ESI)])
+  )
+  (BB 3
+    (OPER 18 Mov [(r 5)]  [(r 1)])
+    (OPER 4 Add_I [(r 5)]  [(r 5)(r 2)])
+    (OPER 5 Mov [(r 4)]  [(r 5)])
+  )
+  (BB 4
+    (OPER 6 Mov [(r 7)]  [(i 10)])
+    (OPER 19 Cmp [(m Flags)]  [(r 4)(r 7)])
+    (OPER 20 BGE []  [(bb 5)(m Flags)])
+    (OPER 9 Mov [(r 9)]  [(i 1)])
+    (OPER 21 Mov [(r 8)]  [(r 4)])
+    (OPER 10 Add_I [(r 8)]  [(r 8)(r 9)])
+    (OPER 11 Mov [(r 4)]  [(r 8)])
+    (OPER 12 Jmp []  [(bb 4)])
+  )
+  (BB 5
+    (OPER 13 Mov [(m EAX)]  [(r 4)])
+  )
+  (BB 6
+    (OPER 15 Return []  [(m EAX)])
+  )
+)
+(FUNCTION  david  []
   (BB 2
   )
   (BB 3
-    (OPER 4 Mov [(r 3)]  [(i 1)])
-    (OPER 5 Mov [(r 4)]  [(i 2)])
-    (OPER 17 Mov [(r 2)]  [(r 3)])
-    (OPER 6 Add_I [(r 2)]  [(r 2)(r 4)])
-    (OPER 7 Mov [(r 1)]  [(r 2)])
+    (OPER 4 Mov [(r 2)]  [(i 5)])
+    (OPER 17 Mov [(m EDI)]  [(r 2)])
+    (OPER 6 Mov [(r 3)]  [(i 6)])
+    (OPER 18 Mov [(m ESI)]  [(r 3)])
+    (OPER 8 Mov [(r 4)]  [(i 2)])
+    (OPER 19 Mov [(m EDX)]  [(r 4)])
+    (OPER 10 JSR []  [(s josh)(m EDI)(m ESI)(m EDX)] [(numParams 3)])
+    (OPER 12 Mov [(r 6)]  [(i 7)])
+    (OPER 20 Mov [(r 1)]  [(r 5)])
+    (OPER 13 Add_I [(r 1)]  [(r 1)(r 6)])
+    (OPER 14 Mov [(m EAX)]  [(r 1)])
   )
   (BB 4
-    (OPER 8 Mov [(r 6)]  [(i 10)])
-    (OPER 18 Cmp [(m Flags)]  [(r 1)(r 6)])
-    (OPER 19 BGE []  [(bb 6)(m Flags)])
-    (OPER 11 Mov [(r 8)]  [(i 1)])
-    (OPER 20 Mov [(r 7)]  [(r 1)])
-    (OPER 12 Add_I [(r 7)]  [(r 7)(r 8)])
-    (OPER 13 Mov [(r 1)]  [(r 7)])
-    (OPER 14 Jmp []  [(bb 4)])
-  )
-  (BB 6
     (OPER 16 Return []  [(m EAX)])
   )
 )
