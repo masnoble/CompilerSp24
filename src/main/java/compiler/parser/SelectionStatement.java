@@ -49,8 +49,9 @@ public class SelectionStatement extends Statement{
         Operand zero = new Operand(OperandType.INTEGER, 0);
         op.setSrcOperand(1, zero);
         Operand branchDest;
-        BasicBlock elseBlock = new BasicBlock(f);;
+        BasicBlock elseBlock = null; 
         if(elseStatement != null){
+            elseBlock = new BasicBlock(f);
             branchDest = new Operand(OperandType.BLOCK, elseBlock.getBlockNum());
         } else {
             branchDest = new Operand(OperandType.BLOCK, postBlock.getBlockNum());
@@ -61,6 +62,7 @@ public class SelectionStatement extends Statement{
         //append the then
         f.appendToCurrentBlock(thenBlock);
         f.setCurrBlock(thenBlock);
+        
         //gen the then
         statement.genLLCode(f);
         
@@ -70,17 +72,16 @@ public class SelectionStatement extends Statement{
 
 
         //else stuff
-        if(elseStatement != null){
+        if(elseBlock != null){
             f.setCurrBlock(elseBlock);
             elseStatement.genLLCode(f);
             
             Operand postBlockOperand = new Operand(OperandType.BLOCK, postBlock.getBlockNum());
             Operation jmpOp = new Operation(OperationType.JMP, elseBlock);
             jmpOp.setSrcOperand(0, postBlockOperand);
-            elseBlock.appendOper(jmpOp);
+            f.getCurrBlock().appendOper(jmpOp);
             f.appendUnconnectedBlock(elseBlock);
         }
-
 
         f.setCurrBlock(postBlock);
     }

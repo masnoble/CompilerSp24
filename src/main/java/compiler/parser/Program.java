@@ -12,11 +12,13 @@ public class Program{
     
 
     public CodeItem genLLCode(){
-
+        
         CodeItem head = declarations.get(0).genLLCode();
+        CodeItem curr = head;
 
         for(int i = 1; i < declarations.size(); i++){
-            head.setNextItem(declarations.get(i).genLLCode());
+            curr.setNextItem(declarations.get(i).genLLCode());
+            curr = curr.getNextItem();
         }
         
         return head;

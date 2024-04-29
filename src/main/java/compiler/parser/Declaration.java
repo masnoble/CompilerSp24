@@ -2,7 +2,9 @@ package compiler.parser;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
+import java.util.HashMap;
 
+import compiler.compiler.CMinusCompiler;
 import compiler.lowlevel.CodeItem;
 import compiler.lowlevel.Data;
 
@@ -19,6 +21,12 @@ public class Declaration{
 
     //WE MAY OR MAY NOT NEED THIS IMPLMENTED. COULD BE ABSTRACT
     CodeItem genLLCode(){
+        //globals
+        //cminuscompiler.hashmap
+        //global name of variable twice
+        HashMap global =  CMinusCompiler.globalHash;
+        global.put(ID, ID);
+
         int type;
 
         if(voidint){

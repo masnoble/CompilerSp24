@@ -12,44 +12,13 @@ public class VarDeclaraction extends Declaration{
         super(VI, identifier, number);
     }
 
-    CodeItem genLLCode(Function f){
+    void genLLCode(Function f){
         //locals
         //name, create reg num
         int reg = f.getNewRegNum();
         f.getTable().put(ID, reg);
-
-        int type;
-
-        if(voidint){
-            type = 1;
-        }
-        else{
-            type = 0;
-        }
-        return new Data(type, ID);
     }
-
-
-    // i think we already have this
-    CodeItem genLLCode(){
-        //globals
-        //cminuscompiler.hashmap
-        //global name of variable twice
-        HashMap global =  CMinusCompiler.globalHash;
-        global.put(ID, ID);
-
-        
-
-        int type;
-
-        if(voidint){
-            type = 1;
-        }
-        else{
-            type = 0;
-        }
-        return new Data(type, ID);
-    }
+    
 
     // we don't need print here since it is implemented in Declaration
 }

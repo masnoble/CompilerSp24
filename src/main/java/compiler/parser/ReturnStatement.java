@@ -41,5 +41,6 @@ public class ReturnStatement extends Statement{
         
         BasicBlock returnBlock =  f.genReturnBlock();
         f.appendToCurrentBlock(returnBlock);
+        f.setCurrBlock(returnBlock);
     }
 }

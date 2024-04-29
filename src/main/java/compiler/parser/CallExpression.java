@@ -63,12 +63,14 @@ public class CallExpression extends Expression {
         
         // Move the ret reg into our register
         Operation movOperation = new Operation(OperationType.ASSIGN, f.getCurrBlock());
+
         Operand srcOperand = new Operand(OperandType.MACRO, "RetReg");
         movOperation.setSrcOperand(0, srcOperand);
+
         int expReg = f.getNewRegNum();
         Operand dstOperand = new Operand(OperandType.REGISTER, expReg);
         movOperation.setDestOperand(0, dstOperand);
-
+        f.getCurrBlock().appendOper(movOperation);
 
         return expReg;
     }

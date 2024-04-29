@@ -1,0 +1,16 @@
+int a;
+
+int addThem(int d, int e) {
+  int f;
+  f = d + e;
+
+  return f;
+}
+
+int main (void) {
+
+  putchar(48+1);
+ 
+  return 0;
+}
+

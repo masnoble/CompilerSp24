@@ -62,9 +62,14 @@ public class FunctionDeclaration extends Declaration{
 
 
         
-        if(f.getLastBlock().getFirstOper().getType() != OperationType.FUNC_EXIT){
+        if(f.getLastBlock().getFirstOper() != null && 
+                f.getLastBlock().getFirstOper().getType() != OperationType.FUNC_EXIT){
+                    
             BasicBlock returnBlock =  f.genReturnBlock();
-    
+            f.appendBlock(returnBlock);
+        }
+        else if(f.getLastBlock().getFirstOper() == null){
+            BasicBlock returnBlock =  f.genReturnBlock();
             f.appendBlock(returnBlock);
         }
 
