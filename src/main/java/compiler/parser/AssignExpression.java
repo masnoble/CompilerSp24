@@ -19,9 +19,8 @@ public class AssignExpression extends Expression {
     }
 
     int genLLCode(Function f){
-        int lhsReg = lhs.genLLCode(f);
         Operand lhsOp;
-
+    
         //change operatino if this is a global variable
         OperationType opType;
         Operation op;
@@ -34,23 +33,22 @@ public class AssignExpression extends Expression {
             op.setSrcOperand(1, lhsOp);
         }
         else{
+            int lhsReg  = (int) f.getTable().get(lhs.ID);
             opType = OperationType.ASSIGN;
             lhsOp =  new Operand(OperandType.REGISTER, lhsReg);
             op = new Operation(opType, f.getCurrBlock());
             op.setDestOperand(0, lhsOp);
         }
 
-        
         int rhsReg = rhs.genLLCode(f);
         Operand rhsOp = new Operand(OperandType.REGISTER, rhsReg);
 
-        
         op.setSrcOperand(0,rhsOp);
-
         
         f.getCurrBlock().appendOper(op);
     
-        return lhsReg;
+        
+        return rhsReg;
     }
 
     void print(String prefix, BufferedWriter writer) throws IOException{

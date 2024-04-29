@@ -52,7 +52,7 @@ void printInt(int r) {
 
     putDigit(r);
   }
-  
+
 }
 
 int main (void) {
@@ -81,16 +81,7 @@ int main (void) {
   h = g / 3;
   g = h * 4;
 
-  putchar(a+48);
-  putchar (10);
-
   c = addThem(a, b);
-  putchar (c+48);
-  putchar (10);
-  putchar (g+48);
-  putchar (10);
-
-
   putchar (56);
   putchar (61);
   putchar (c+g);
